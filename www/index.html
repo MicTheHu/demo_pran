@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script type="application/shiny-singletons"></script>
+  <script type="application/html-dependencies">json2[2014.02.04];jquery[1.12.4];shiny[1.1.0];htmlwidgets[1.2];leaflet[1.3.1];leafletfix[1.0.0];Proj4Leaflet[1.0.1];rstudio_leaflet[1.3.1];leaflet-binding[2.0.2];bootstrap[3.3.7]</script>
+  <script src="shared/json2-min.js"></script>
+  <script src="shared/jquery.min.js"></script>
+  <link href="shared/shiny.css" rel="stylesheet"/>
+  <script src="shared/shiny.min.js"></script>
+
+  <script src="lib/htmlwidgets-1.2/htmlwidgets.js"></script>
+  <script src="lib/htmlwidgets-1.2/htmlwidgets.js"></script>
+  <link href="lib/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+  <script src="lib/leaflet-1.3.1/leaflet.js"></script>
+  <link href="lib/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+  <script src="lib/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+  <script src="lib/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+  <link href="lib/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+  <script src="lib/leaflet-binding-2.0.2/leaflet.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+  <script src="shinyjs/inject.js"></script>
+  <script src="js/bootstrap.js" crossorigin="anonymous"></script>
+  
+  <script src="lib/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+  <script src="lib/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-toggle.css"/>
+  <script src="js/bootstrap-toggle.min.js"></script>
+
+  <title> Echtzeit-Ergebnisdarstellung von Online-Umfragen in Shiny - PRAN 2020 </title>
+</head>
+<body>
+  <div class="container fill-height">
+  <nav  class="navbar navbar-default navbar-custom bg-red">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav shiny-tab-input pull-right" data-tabsetid="1" id="tabs">
+        <li class="active"><a href="#tab-1-1" data-toggle="tab" data-value="App">Ergebnisse</a></li>
+        <li><a href="#tab-1-2" data-toggle="tab" data-value="Settings">Einstellungen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="tab-content" data-tabsetid="1">
+      <!-- HAUPTPANEL -->
+      <div class="tab-pane active" data-value="App" id="tab-1-1">
+        <div class="row text-center">
+          <div class="col-sm-12">
+            <h1>Echtzeit-Ergebnisdarstellung von Online-Umfragen als interaktive Webanwendung mit R, shiny und LimeSurvey</h1>
+          </div>
+        </div>
+		
+        <div class="row">
+        </div>
+		
+		<div class="row top20px">
+		  <div class="col-sm-offset-0 col-sm-2">
+            <label id="sub_polls" class="shiny-html-output"> Abb.: Umfragen </label>
+            <div class="checkbox-inline">
+              <input id="show_plot1" type="checkbox" checked data-toggle="toggle" data-size="normal" data-on="<span class='glyphicon glyphicon-ok'></span>" data-off="<span class='glyphicon glyphicon-remove'></span>" data-onstyle="success" data-offstyle="default" data-width="80">
+            </div>
+          </div>
+		  
+		  <div class="col-sm-2">
+            <label id="fig_map" class="shiny-html-output"> Abb.: Karte </label>
+            <div class="checkbox-inline">
+              <input id="show_plot2" type="checkbox" data-toggle="toggle" data-size="normal" data-on="<span class='glyphicon glyphicon-ok'></span>" data-off="<span class='glyphicon glyphicon-remove'></span>" data-onstyle="success" data-offstyle="default" data-width="80">
+            </div>
+          </div>
+		  
+		  <div class="col-sm-2">
+            <label id="results" class="shiny-html-output"> Abb.: Ergebnisse </label>
+            <div class="checkbox-inline">
+              <input id="show_plot3" type="checkbox" data-toggle="toggle" data-size="normal" data-on="<span class='glyphicon glyphicon-ok'></span>" data-off="<span class='glyphicon glyphicon-remove'></span>" data-onstyle="success" data-offstyle="default" data-width="80">
+            </div>
+          </div> 
+		  
+		  <div class="col-sm-2">
+            <label id="jitter" class="shiny-html-output"> Option: Wackeln </label>
+            <div class="checkbox-inline">
+              <input id="jitter_enable" type="checkbox" data-toggle="toggle" data-size="normal" data-on="<span class='glyphicon glyphicon-ok'></span>" data-off="<span class='glyphicon glyphicon-remove'></span>" data-onstyle="success" data-offstyle="default" data-width="80">
+            </div>
+          </div> 
+		  
+		  <div class="col-sm-2">
+            <label id="grouping" class="shiny-html-output"> Zeige: Gruppierung </label>
+            <div class="checkbox-inline">
+              <input id="grouping_enable" type="checkbox" data-toggle="toggle" data-size="normal" data-on="<span class='glyphicon glyphicon-ok'></span>" data-off="<span class='glyphicon glyphicon-remove'></span>" data-onstyle="success" data-offstyle="default" data-width="80">
+            </div>
+          </div> 
+          
+          <div class="col-sm-2">
+            <label id="outlier" class="shiny-html-output"> Entferne: Ausreißer </label>
+            <div class="checkbox-inline">
+              <input id="outlier_check" type="checkbox" data-toggle="toggle" data-size="normal" data-on="<span class='glyphicon glyphicon-ok'></span>" data-off="<span class='glyphicon glyphicon-remove'></span>" data-onstyle="success" data-offstyle="default" data-width="80">
+            </div>
+          </div> 
+
+        </div>
+
+
+		<div id="plotwrapper_polls">
+			<div class="row">
+			  <div class="col-sm-offset-1 col-sm-10">
+				<h2 class="text-center">Zeitreihe eingelangter Fragebögen</h2>
+				<div class="wrapper_3_to_2">
+				  <div class="main">
+					<div id="ts_plot" class="shiny-plot-output" style="width: 100%; height: 100%;"></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</div>
+		
+		<div id="plotwrapper_map">
+			<div class="row top20px">
+			  <div class="col-sm-offset-1 col-sm-10">
+				<h2 class="text-center"> Geografische Verteilung der Konferenz-TeilnehmerInnen </h2>
+				<div class="wrapper_3_to_2">
+				  <div class="main">
+					<div id="map" class="leaflet html-widget html-widget-output" style="width: 100%; height: 100%;"></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</div>
+		
+		<div id="plotwrapper_results">
+			<div class="row top20px">
+			  <div class="col-sm-offset-1 col-sm-10">
+				<h2 class="text-center">Distanz zu Wien vs. Anzahl persönlicher Kontakte zu DT</h2>
+				<div class="wrapper_3_to_2">
+				  <div class="main">
+					<div id="results_plot" class="shiny-plot-output" style="width: 110%; height: 130%;"></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</div>
+
+		
+		<div class="row top60px"></div>
+	    <div class="row top60px"></div>
+		<div class="row top60px"></div>
+		<div class="row top60px"></div>
+		<div class="row top60px"></div>
+		
+      </div>
+      <!-- EINSTELLUNGEN -->
+      <div class="tab-pane" data-value="Settings" id="tab-1-2">
+        <div class="row text-center">
+          <h2>Einstellungen</h2>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <h3 style="text-align:left;">Anzeige</h3>
+          </div>
+            <div class="col-sm-9 top15px">
+              <p>Schriftgröße in Abbildungen</p>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group top5px">
+                  <input type="number" class="form-control" id="plot_base_size" value="17" min="4" max="30">
+                </div>
+            </div>
+          </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <h3 style="text-align:left;">Automatisches aktualisieren</h3>
+          </div>
+          <div class="col-sm-9 top15px">
+            <p>Zeitintervall für Aktualisierung (in Sekunden)</p>
+            <p style="margin-top: 26px">Automatische Aktualisierungen aktivieren</p>
+          </div>
+          <div class="col-sm-3 top5px">
+            <div class="form-group top5px">
+              <input type="number" class="form-control" id="autoupdate_interval" value="15" min="2">
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input id="autoupdate_enable" class="form-check-input" type="checkbox" checked value="">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end #container -->
+</body>
+</html>
