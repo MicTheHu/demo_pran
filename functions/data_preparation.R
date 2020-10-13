@@ -36,7 +36,7 @@ data_preparation <- function(data) {
                               "Art der Teilnahme: ", '<strong>', data$participation, "<br>", '</strong>', 
                               "Anzahl Kontakte zu DT: ", '<strong>', data$friends, " <br>", '</strong>', 
                               "Vortrag: ", '<strong>', data$speaker, '</strong>')
-    
+  
   } else {
     data <- data.table(
       "id" = integer(),

@@ -4,7 +4,7 @@
 # Data preparation for time series plot
 #####################################################
 
-ts_data_preparation <- function(data, startdate = as.POSIXct("2020-10-12 11:00:00", format = "%Y-%m-%d %H:%M:%S")) {
+ts_data_preparation <- function(data, startdate = as.POSIXct("2020-10-12 08:30:00", format = "%Y-%m-%d %H:%M:%S")) {
   
   if (!is.null(data)) {
     
