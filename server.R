@@ -18,6 +18,11 @@ library(shinyjs, lib.loc =  package_path)
 library(tidyr, lib.loc = package_path)
 library(dplyr, lib.loc = package_path)
 library(patchwork, lib.loc = package_path)
+library(pROC, lib.loc =  package_path)
+library(randomForest, lib.loc =  package_path)
+library(rpart, lib.loc =  package_path)
+library(caret, lib.loc =  package_path)
+library(ggtext, lib.loc =  package_path)
 
 # Source R functions
 source("functions/ts_data_preparation.R", local = TRUE)
@@ -75,6 +80,7 @@ shinyServer(function(input, output, session) {
   source("timeseries.R", local = TRUE)
   source("map.R", local = TRUE)
   source("results.R", local = TRUE)
+  source("model.R", local = TRUE)
 
   # INPUTS
   source("input_progress.R", local = TRUE)
