@@ -44,12 +44,13 @@
   <nav  class="navbar navbar-default navbar-custom bg-red">
     <div class="container-fluid">
       <ul class="nav navbar-nav shiny-tab-input pull-right" data-tabsetid="1" id="tabs">
-        <li class="active"><a href="#tab-1-1" data-toggle="tab" data-value="App">Ergebnisse</a></li>
-        <li><a href="#tab-1-2" data-toggle="tab" data-value="Settings">Einstellungen</a></li>
+        <li class="active"><a href="#tab-1-1" data-toggle="tab" data-value="App">Deskriptiv</a></li>
+         <li><a href="#tab-1-2" data-toggle="tab" data-value="Prediction">Prediktiv</a></li> 
+        <li><a href="#tab-1-3" data-toggle="tab" data-value="Settings">Einstellungen</a></li>
       </ul>
     </div>
   </nav>
-
+  <!-- -->
   <div class="tab-content" data-tabsetid="1">
       <!-- HAUPTPANEL -->
       <div class="tab-pane active" data-value="App" id="tab-1-1">
@@ -140,7 +141,7 @@
 				<h2 class="text-center">Distanz zu Wien vs. Anzahl persönlicher Kontakte zu DT</h2>
 				<div class="wrapper_3_to_2">
 				  <div class="main">
-					<div id="results_plot" class="shiny-plot-output" style="width: 110%; height: 130%;"></div>
+					<div id="results_plot" class="shiny-plot-output" style="width: 110%; height: 140%;"></div>
 				  </div>
 				</div>
 			  </div>
@@ -155,8 +156,32 @@
 		<div class="row top60px"></div>
 		
       </div>
+      
+      <!-- MODEL -->
+      <div class="tab-pane" data-value="Prediction" id="tab-1-2">
+
+
+			    <div class="row">
+			      <div class="col-sm-offset-1 col-sm-10">
+				      <h2 class="text-center">Vorhersagegüte dreier Modelle <br> 
+				      für abhängige Variable: <i>Art der Teilnahme</i></br></h2>
+				        <div class="wrapper_3_to_2">
+				            <div class="main">
+					          <div id="model_plot" class="shiny-plot-output" style="width: 100%; height: 160%;"></div>
+				          </div>
+				        </div>
+			      </div>
+			    </div>
+        		<div class="row top60px"></div>
+        		<div class="row top60px"></div>
+        		<div class="row top60px"></div>
+        		<div class="row top60px"></div>
+        		<div class="row top60px"></div>
+		    
+      </div>
+      
       <!-- EINSTELLUNGEN -->
-      <div class="tab-pane" data-value="Settings" id="tab-1-2">
+      <div class="tab-pane" data-value="Settings" id="tab-1-3">
         <div class="row text-center">
           <h2>Einstellungen</h2>
         </div>
@@ -193,6 +218,8 @@
           </div>
         </div>
       </div>
+      
+      
     </div>
   </div> <!-- end #container -->
 </body>
