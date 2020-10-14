@@ -19,6 +19,7 @@ output$model_plot <- renderPlot({
       mean(actual != predicted)
     }
     
+    # Logistische Regression
     mod_log <- glm(num_participation ~ dist + friends + speaker, data = data_model_train, family = "binomial")
     
     model_log_pred <- ifelse(predict(mod_log, data_model_test, type = "response") > 0.5, "vor Ort", "online")
