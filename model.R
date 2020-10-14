@@ -8,11 +8,11 @@ output$model_plot <- renderPlot({
     # Datenaufbereitung
     data_model <- RV$data
     data_model$num_participation <- as.numeric(data_model$participation)-1
-    data_model_without_out <- outlier_detection(data = data_model, outlier_check = TRUE)
+    # data_model_without_out <- outlier_detection(data = data_model, outlier_check = TRUE)
     set.seed(3)
-    sample_train <- createDataPartition(data_model_without_out$participation, times = 1, p = 0.8, list = FALSE)
-    data_model_train <- data_model_without_out[sample_train,]
-    data_model_test <- data_model_without_out[-sample_train,]
+    sample_train <- createDataPartition(data_model$participation, times = 1, p = 0.8, list = FALSE)
+    data_model_train <- data_model[sample_train,]
+    data_model_test <- data_model[-sample_train,]
     
     # Funktion für Accuracy
     calc_class_err <- function(actual, predicted) {
